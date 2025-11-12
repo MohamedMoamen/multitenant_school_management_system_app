@@ -13,7 +13,15 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid,GraduationCap,Users,Book,ListChecks } from 'lucide-react';
+import {
+    Book,
+    BookOpen,
+    Folder,
+    GraduationCap,
+    LayoutGrid,
+    ListChecks,
+    Users,
+} from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -42,7 +50,6 @@ const mainNavItems: NavItem[] = [
         href: '/enrollments',
         icon: ListChecks,
     },
-
 ];
 
 const footerNavItems: NavItem[] = [
