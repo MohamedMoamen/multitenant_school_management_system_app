@@ -92,4 +92,3 @@ jobs:
 
       - name: Run Tests
         run: ./vendor/bin/pest --colors
-
