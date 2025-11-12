@@ -3,24 +3,26 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Tenant;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
+    
     public function run(): void
     {
-        // User::factory(10)->create();
+        $tenant = Tenant::firstOrCreate(
+            ['school_name' => 'Test School'],
+            ['address' => 'Test Address']
+        );
 
         User::firstOrCreate(
             ['email' => 'test@example.com'],
             [
                 'name' => 'Test User',
-                'password' => 'password',
+                'password' => bcrypt('password'),
                 'email_verified_at' => now(),
+                'tenant_id' => $tenant->tenant_id,
             ]
         );
     }
