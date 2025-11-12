@@ -26,6 +26,7 @@ export default function Register() {
                 {({ processing, errors }) => (
                     <>
                         <div className="grid gap-6">
+                            {/* Name */}
                             <div className="grid gap-2">
                                 <Label htmlFor="name">Name</Label>
                                 <Input
@@ -44,6 +45,7 @@ export default function Register() {
                                 />
                             </div>
 
+                            {/* Email */}
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email address</Label>
                                 <Input
@@ -58,6 +60,7 @@ export default function Register() {
                                 <InputError message={errors.email} />
                             </div>
 
+                            {/* Password */}
                             <div className="grid gap-2">
                                 <Label htmlFor="password">Password</Label>
                                 <Input
@@ -72,6 +75,7 @@ export default function Register() {
                                 <InputError message={errors.password} />
                             </div>
 
+                            {/* Confirm Password */}
                             <div className="grid gap-2">
                                 <Label htmlFor="password_confirmation">
                                     Confirm password
@@ -90,10 +94,38 @@ export default function Register() {
                                 />
                             </div>
 
+                            {/* School Name */}
+                            <div className="grid gap-2">
+                                <Label htmlFor="school_name">School Name</Label>
+                                <Input
+                                    id="school_name"
+                                    type="text"
+                                    required
+                                    tabIndex={5}
+                                    name="school_name"
+                                    placeholder="Enter your school name"
+                                />
+                                <InputError message={errors.school_name} />
+                            </div>
+
+                            {/* Address (optional) */}
+                            <div className="grid gap-2">
+                                <Label htmlFor="address">School Address (optional)</Label>
+                                <Input
+                                    id="address"
+                                    type="text"
+                                    tabIndex={6}
+                                    name="address"
+                                    placeholder="Enter school address"
+                                />
+                                <InputError message={errors.address} />
+                            </div>
+
+                            {/* Submit Button */}
                             <Button
                                 type="submit"
                                 className="mt-2 w-full"
-                                tabIndex={5}
+                                tabIndex={7}
                                 data-test="register-user-button"
                             >
                                 {processing && <Spinner />}
@@ -101,9 +133,10 @@ export default function Register() {
                             </Button>
                         </div>
 
+                        {/* Login link */}
                         <div className="text-center text-sm text-muted-foreground">
                             Already have an account?{' '}
-                            <TextLink href={login()} tabIndex={6}>
+                            <TextLink href={login()} tabIndex={8}>
                                 Log in
                             </TextLink>
                         </div>
