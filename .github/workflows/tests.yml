@@ -13,7 +13,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-
+    
     services:
       mysql:
         image: mysql:8.0
@@ -27,11 +27,11 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -39,31 +39,31 @@ jobs:
           tools: composer:v2
           coverage: xdebug
           extensions: mbstring, pdo_mysql, gd
-
+      
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
-
+      
       - name: Wait for MySQL to be ready
         run: |
           echo "Waiting for MySQL to be ready..."
           for i in {1..30}; do
-            mysqladmin ping -h mysql -uroot -proot >/dev/null 2>&1 && break
+            mysqladmin ping -h 127.0.0.1 -uroot -proot >/dev/null 2>&1 && break
             echo "MySQL not ready yet ($i)..."
             sleep 2
           done
-
+      
       - name: Install Node Dependencies
         run: npm ci
-
+      
       - name: Build Assets
         run: npm run build
-
+      
       - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
+      
       - name: Create .env for CI
         run: |
           echo "APP_NAME=Laravel" > .env
@@ -72,23 +72,23 @@ jobs:
           echo "APP_DEBUG=true" >> .env
           echo "APP_URL=http://localhost" >> .env
           echo "DB_CONNECTION=mysql" >> .env
-          echo "DB_HOST=mysql" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=3306" >> .env
           echo "DB_DATABASE=schools" >> .env
           echo "DB_USERNAME=root" >> .env
           echo "DB_PASSWORD=root" >> .env
-
+      
       - name: Generate APP_KEY
         run: php artisan key:generate --ansi
-
+      
       - name: Clear caches
         run: |
           php artisan config:clear
           php artisan route:clear
           php artisan view:clear
-
+      
       - name: Run Migrations
         run: php artisan migrate --force
-
+      
       - name: Run Tests
         run: ./vendor/bin/pest --colors
