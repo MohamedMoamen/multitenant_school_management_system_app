@@ -50,7 +50,7 @@ jobs:
         run: |
           echo "Waiting for MySQL to be ready..."
           for i in {1..30}; do
-            mysqladmin ping -h mysql -uroot -proot &>/dev/null && break
+            mysqladmin ping -h mysql -uroot -proot >/dev/null 2>&1 && break
             echo "MySQL not ready yet ($i)..."
             sleep 2
           done
