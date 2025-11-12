@@ -55,6 +55,9 @@ jobs:
           echo "DB_USERNAME=root" >> .env
           echo "DB_PASSWORD=root" >> .env
 
+      - name: Set Cache Driver to File
+        run: echo "CACHE_DRIVER=file" >> .env
+
       - name: Generate APP_KEY
         run: php artisan key:generate --ansi
 
