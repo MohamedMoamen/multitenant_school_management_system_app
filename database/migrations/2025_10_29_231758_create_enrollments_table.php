@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('tenant_id');
             $table->integer('student_id');
             $table->integer('course_id');
-            $table->string('enrollment_date')->default(DB::raw('curdate()'));
+            $table->string('enrollment_date')->useCurrent();
         });
     }
 
