@@ -18,4 +18,8 @@ class Tenant extends Model
         'school_name',
         'address',
     ];
+
+    public function users() {
+    return $this->hasMany(User::class, 'tenant_id', 'tenant_id');
+    }
 }
