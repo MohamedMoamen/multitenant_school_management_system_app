@@ -50,7 +50,11 @@ jobs:
         run: |
           echo "Waiting for MySQL to be ready..."
           for i in $(seq 1 30); do
-            mysqladmin ping -h mysql -uroot -proot >/dev/null 2>&1 && break
+            mysqladmin ping -h mysql -uroot -proot >/dev/null 2>&1
+            if [ $? -eq 0 ]; then
+              echo "MySQL is ready"
+              break
+            fi
             echo "MySQL not ready yet ($i)..."
             sleep 2
           done
@@ -92,4 +96,5 @@ jobs:
 
       - name: Run Tests
         run: ./vendor/bin/pest --colors
+
 
